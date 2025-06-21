@@ -6,3 +6,13 @@ def index(request):
 
 def item(request):
     return HttpResponse('this is my item!')
+
+def contact (request):
+    return HttpResponse(' this is my contact page')
+
+
+
+
+
+
+
