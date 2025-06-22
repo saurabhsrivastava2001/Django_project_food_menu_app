@@ -1,3 +1,21 @@
-<h1> {{ item.item_name }} </h1>
-<h2> {{ item.item_desc }} </h2>
-<h3>price:  {{ item.item_price }} </h3>
+{% extends 'food/base.html' %} {% block body %}
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-6">
+      <img
+        height="150 px"
+        class="img-fluid card"
+        src="{{ item.item_image }}"
+        alt=""
+      />
+    </div>
+    <div class="col-md-6">
+      <div class="fs-1 text-black">{{ item.item_name }}</div>
+      <div class="fs-2 text-black">{{ item.item_desc }}</div>
+      <div class="fs-2 text-primary">₹ {{ item.item_price }}</div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

@@ -1,11 +1,37 @@
-{% for item in item_list %}
+{% extends 'food/base.html' %}
 
-<ul>
-  <li>
-    <!-- <a href="http://127.0.0.1:8000/food/{{ item.id }}">{{ item.id }}: {{ item.item_name }}</a> -->
-    <a href="{% url 'food:detail' item.id %}">
-      {{ item.id }}: {{ item.item_name }}
-    </a>
-  </li>
-</ul>
-{% endfor %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    {% block body %} 
+  {% for item in item_list %}
+  <div class="row">
+
+    <!-- Offset + Image -->
+    <div class="col-md-3 offset-md-2 mb-2">
+      <img src="{{ item.item_image }}" 
+           alt="{{ item.item_name }}" 
+           class="img-fluid card " height="150px">
+    </div>
+
+    <!-- Text Details -->
+    <div class="col-md-2 ">
+      <h2 >{{ item.item_name }}</h2>
+      <h4 >{{ item.item_desc }}</h4>
+      <h3 >₹{{ item.item_price }}</h3>
+    </div>
+
+    <!-- Button Placeholder -->
+    <div class="col-md-2">
+      <a href=" {% url 'food:detail' item.id %} " class="btn btn-primary">Details</a>
+    </div>
+  </div>
+  {% endfor %}
+    {% endblock %}
+  </body>
+</html>
