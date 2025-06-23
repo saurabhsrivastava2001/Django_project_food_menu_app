@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render ,redirect
 from .models import Item
 from django.http import HttpResponse
+from .forms import ItemForm
 # Create your views here.
 def index(request):
     item_list= Item.objects.all()
@@ -21,3 +22,41 @@ def detail(request,item_id):
         'item':item,
     }
     return render(request,'food/detail.html',context)
+
+def create_item(request):
+    form = ItemForm(request.POST or None)
+
+    # Debug print
+    print("Request method:", request.method)
+
+    if request.method == "POST":
+        print("POST Data:", request.POST)
+
+        if form.is_valid():
+            form.save()
+            return redirect('food:index')
+        else:
+            print("Form errors:", form.errors)
+
+    context = {'form': form}
+    return render(request, 'food/item_form.html', context)
+
+#updating the item 
+
+def update_item(request,id):
+    item= Item.objects.get(id=id)
+    form= ItemForm(request.POST or None ,instance=item)
+    if form.is_valid():
+        form.save()
+        return redirect('food:index')
+    return render (request,'food/item_form.html',{'form':form,'item':item})
+
+#deleting the item
+
+def delete_item(request,id):
+    item= Item.objects.get(id=id)
+
+    if request.method=='POST':
+        item.delete()
+        return redirect('food:index')
+    return render(request,'food/item_delete.html',{'item':item})

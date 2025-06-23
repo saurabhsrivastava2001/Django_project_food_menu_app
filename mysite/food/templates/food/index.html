@@ -29,6 +29,7 @@
     <!-- Button Placeholder -->
     <div class="col-md-2">
       <a href=" {% url 'food:detail' item.id %} " class="btn btn-primary">Details</a>
+      <a href=" {% url 'food:update_item' item.id %} " class="btn btn-warning ms-3">Update</a>
     </div>
   </div>
   {% endfor %}

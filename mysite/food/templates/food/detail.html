@@ -1,4 +1,6 @@
-{% extends 'food/base.html' %} {% block body %}
+{% extends 'food/base.html' %} 
+
+{% block body %}
 
 <div class="container-fluid">
   <div class="row">
@@ -14,6 +16,7 @@
       <div class="fs-1 text-black">{{ item.item_name }}</div>
       <div class="fs-2 text-black">{{ item.item_desc }}</div>
       <div class="fs-2 text-primary">₹ {{ item.item_price }}</div>
+      <a href="{% url 'food:delete_item' item.id %}  " class="btn btn-danger">Delete</a>
     </div>
   </div>
 </div>
