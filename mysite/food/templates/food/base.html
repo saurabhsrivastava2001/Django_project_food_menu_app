@@ -1,4 +1,4 @@
-{% load static %}
+ {% load static %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -24,10 +24,20 @@
     <a href="#" class =" navbar-brand ms-2"> Food App </a>
     <div class="navbar">
       <a href=" {% url 'food:create_item'  %} " class="nav-item nav-link text-white fs-5 px-4" >Add Item</a>
-      <a href="#" class="nav-item nav-link text-white fs-5 px-4">contact</a>
+      <a href="{% url 'register' %}" class="nav-item nav-link text-white fs-5 px-4">Register</a>
       <a href="#" class="nav-item nav-link text-white fs-5 px-4">login</a>
     </div>
   </nav>
+
+  {% if messages %}
+
+    {% for message in messages %}
+      <div class=" alert alert-{{message.tags}}"> {{message}}</div>
+    {% endfor %}
+  
+    {% endif %}
+
+
 
   {% block body %}
   
