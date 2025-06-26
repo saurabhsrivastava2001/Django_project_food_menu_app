@@ -25,7 +25,13 @@
     <div class="navbar">
       <a href=" {% url 'food:create_item'  %} " class="nav-item nav-link text-white fs-5 px-4" >Add Item</a>
       <a href="{% url 'register' %}" class="nav-item nav-link text-white fs-5 px-4">Register</a>
-      <a href="#" class="nav-item nav-link text-white fs-5 px-4">login</a>
+      
+      {% if user.is_authenticated %}
+      <a href="{% url 'logout' %}" class="nav-item nav-link text-white fs-5 px-4">logout</a>
+      {% else %}
+      <a href="{% url 'login' %}" class="nav-item nav-link text-white fs-5 px-4">login</a>
+      {% endif %}
+      <a href="{% url 'profile' %}" class="nav-item nav-link text-white fs-5 px-4">Profile</a>
     </div>
   </nav>
 
