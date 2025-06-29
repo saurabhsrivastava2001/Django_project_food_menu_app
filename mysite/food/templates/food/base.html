@@ -1,4 +1,4 @@
- {% load static %}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -18,38 +18,75 @@
       integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
       crossorigin="anonymous"
     ></script>
+    <style>
+      body {
+        background-image: url("{% static 'food/bg/bcg_pic.jpg' %}");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-attachment: fixed;
+        margin: 0;
+        padding: 0;
+      }
+
+      /* Blurred navbar effect */
+      .custom-blur-navbar {
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        background-color: rgba(
+          0,
+          0,
+          0,
+          0.4
+        ); /* semi-transparent dark background */
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+      }
+    </style>
   </head>
   <body>
-     <nav class="navbar navbar-dark bg-dark mb-2" >
-    <a href="#" class =" navbar-brand ms-2"> Food App </a>
-    <div class="navbar">
-      <a href=" {% url 'food:create_item'  %} " class="nav-item nav-link text-white fs-5 px-4" >Add Item</a>
-      <a href="{% url 'register' %}" class="nav-item nav-link text-white fs-5 px-4">Register</a>
-      
-      {% if user.is_authenticated %}
-      <a href="{% url 'logout' %}" class="nav-item nav-link text-white fs-5 px-4">logout</a>
-      {% else %}
-      <a href="{% url 'login' %}" class="nav-item nav-link text-white fs-5 px-4">login</a>
-      {% endif %}
-      <a href="{% url 'profile' %}" class="nav-item nav-link text-white fs-5 px-4">Profile</a>
-      <a href="{% url 'profile' %}" ><img class="class="rounded-circle" 
-           style="width: 50px;  height: 50px; object-fit: cover;" src="{{ user.profile.image.url }}" alt="user_image"></a>
-    </div>
-  </nav>
+    <nav class="navbar navbar-expand-lg custom-blur-navbar">
+      <a href="{% url 'food:index' %}" class="navbar-brand text-white ms-4"
+        >Food App</a
+      >
+      <div class="navbar-nav ms-auto me-4">
+        <a href="{% url 'register' %}" class="nav-link text-white fs-5 px-3"
+          >Register</a
+        >
+        <a
+          href="{% url 'food:create_item' %}"
+          class="nav-link text-white fs-5 px-3"
+          >Add Item</a
+        >
 
-  {% if messages %}
+        {% if user.is_authenticated %}
+        <a href="{% url 'logout' %}" class="nav-link text-white fs-5 px-3"
+          >Logout</a
+        >
+        {% else %}
+        <a href="{% url 'login' %}" class="nav-link text-white fs-5 px-3"
+          >Login</a
+        >
+        {% endif %}
 
-    {% for message in messages %}
-      <div class=" alert alert-{{message.tags}}"> {{message}}</div>
-    {% endfor %}
-  
-    {% endif %}
+        <a href="{% url 'profile' %}" class="nav-link text-white fs-5 px-3"
+          >Profile</a
+        >
+        <a href="{% url 'profile' %}">
+          <img
+            class="rounded-circle"
+            style="width: 40px; height: 40px; object-fit: cover"
+            src="{{ user.profile.image.url }}"
+            alt="user_image"
+          />
+        </a>
+      </div>
+    </nav>
 
-
-
-  {% block body %}
-  
-  {% endblock %}
-
+    {% if messages %} {% for message in messages %}
+    <div class=" alert alert-{{message.tags}}">{{message}}</div>
+    {% endfor %} {% endif %} {% block body %} {% endblock %}
   </body>
 </html>

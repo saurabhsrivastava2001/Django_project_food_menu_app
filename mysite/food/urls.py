@@ -3,13 +3,12 @@ from django.urls import path
 
 app_name='food'
 urlpatterns = [
-    path('',views.IndexView.as_view(),name='index'),
+    path('',views.IndexView.as_view(),name='index'),#class based view index(list view)
 
     path('item/',views.item,name='item'),
-    path('contact/',views.contact,name='item'),
-    path('<int:item_id>/',views.detail,name='detail'),
+    path('<int:pk>/',views.FoodDetail.as_view(),name='detail'),#class based view , detail view
     #add items
-    path ('add/',views.create_item,name='create_item'),
+    path ('add/',views.CreateItem.as_view(),name='create_item'),
     #update items
     path('update/<int:id>',views.update_item,name='update_item'),
     #delete url 
