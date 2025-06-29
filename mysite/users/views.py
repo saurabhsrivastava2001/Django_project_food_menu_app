@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 #user creation form 
-from .forms import RegisterForm
+from .forms import RegisterForm,Profile
 #for messages after signup
 from django.contrib import messages
 #decorator for the login req to acccess the user profile
@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 def register(request):
     if request.method == 'POST':#if submit button is pressed
-        form = RegisterForm(request.POST)  #  Bind form with POST data
+        form = RegisterForm(request.POST)  # Bind form with POST data
         if form.is_valid(): # takes care fo the duplicated user names  
             form.save()  #  Save the new user to the database
             username = form.cleaned_data.get('username')
@@ -22,3 +22,4 @@ def register(request):
 @login_required
 def profilepage(request):
     return render(request, 'users/profile.html')
+

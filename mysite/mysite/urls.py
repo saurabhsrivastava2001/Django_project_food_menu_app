@@ -22,13 +22,18 @@ from food import views as food_views
 
 from django.contrib.auth import views as auth_views
 
+from django.conf import settings
+from django.conf.urls.static import static
+
 urlpatterns = [
-    path('',food_views.index,name='food_index'),
+    path('', food_views.index, name='food_index'),
     path('admin/', admin.site.urls),
-    path('food/',include('food.urls')),
-    path('register/',user_views.register, name ='register'),
-    path('login/',auth_views.LoginView.as_view(template_name='users/login.html'),name='login'),
-    path('logout/',auth_views.LogoutView.as_view(template_name='users/logout.html'),name='logout'),
-    path('profile/',user_views.profilepage,name='profile'),
+    path('food/', include('food.urls')),
+    path('register/', user_views.register, name='register'),
+    path('login/', auth_views.LoginView.as_view(template_name='users/login.html'), name='login'),
+    path('logout/', auth_views.LogoutView.as_view(template_name='users/logout.html'), name='logout'),
+    path('profile/', user_views.profilepage, name='profile'),
 ]
-9
+
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

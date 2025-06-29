@@ -1,4 +1,7 @@
 <h1>
 
-    {{user.username}}
+    {{ user.username }}
+  
 </h1>
+<h2>  location : {{ user.profile.location }}</h2>
+<img src="{{ user.profile.image.url }}" alt="">

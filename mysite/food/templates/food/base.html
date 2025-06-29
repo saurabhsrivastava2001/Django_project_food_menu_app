@@ -32,6 +32,8 @@
       <a href="{% url 'login' %}" class="nav-item nav-link text-white fs-5 px-4">login</a>
       {% endif %}
       <a href="{% url 'profile' %}" class="nav-item nav-link text-white fs-5 px-4">Profile</a>
+      <a href="{% url 'profile' %}" ><img class="class="rounded-circle" 
+           style="width: 50px;  height: 50px; object-fit: cover;" src="{{ user.profile.image.url }}" alt="user_image"></a>
     </div>
   </nav>
 

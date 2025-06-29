@@ -2,6 +2,10 @@ from django.shortcuts import render ,redirect
 from .models import Item
 from django.http import HttpResponse
 from .forms import ItemForm
+
+#class based views 
+from django.views.generic.list import ListView  #because the index view is listing the objects 
+
 # Create your views here.
 def index(request):
     item_list= Item.objects.all()
@@ -9,6 +13,13 @@ def index(request):
         'item_list':item_list,
     }
     return render(request,'food/index.html',context)
+
+#class based views
+class IndexView(ListView) :
+    model=Item
+    template_name='food/index.html'
+    context_object_name='item_list'
+
 
 def item(request):
     return HttpResponse('this is my item!')
@@ -31,14 +42,14 @@ def create_item(request):
 
     if request.method == "POST":
         print("POST Data:", request.POST)
-
+        
         if form.is_valid():
             form.save()
             return redirect('food:index')
         else:
             print("Form errors:", form.errors)
-
-    context = {'form': form}
+    
+    context = {'form': form }
     return render(request, 'food/item_form.html', context)
 
 #updating the item 
